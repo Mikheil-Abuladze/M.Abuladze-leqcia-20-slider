@@ -183,7 +183,21 @@ function sliderFn() {
     });
   }
 
-  setInterval(goToNextSlide, 5000);
+  // Automatically change slide every 5 seconds
+  function startAutoSlide() {
+    slideInterval = setInterval(goToNextSlide, 5000);
+  }
+
+  // Stop the automatic slide change when hovering
+  function stopAutoSlide() {
+    clearInterval(slideInterval);
+  }
+
+  // Event listeners to stop/start auto slide on hover
+  slides.forEach((slide) => {
+    slide.addEventListener("mouseenter", stopAutoSlide);
+    slide.addEventListener("mouseleave", startAutoSlide);
+  });
 
   function goToNextSlide() {
     if (currentSlide === slides.length - 1) {
